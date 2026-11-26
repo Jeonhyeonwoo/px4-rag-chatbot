@@ -1,0 +1,144 @@
+[
+  {
+    "question": "컴퍼스 보정은 어떻게 하나요?",
+    "latency_sec": 8.7,
+    "answer": "# 컴퍼스 보정 방법\n\n## 사전 조건 [6]\n1. 큰 금속 물체나 자기장으로부터 멀리 떨어진 장소를 선택하세요.\n2. USB 대신 텔레메트리 라디오로 연결하세요 (USB는 자기 간섭을 유발할 수 있음).\n3. 외부 컴퍼스를 사용하는 경우, 다른 전자 장치로부터 최대한 멀리 장착하세요.\n\n---\n\n## 보정 종류\n\nPX4는 세 가지 보정 방식을 제공합니다 [1]:\n\n- **Complete**: 기체에 처음 설치하거나 구성이 크게 변경된 경우 필요. Hard/soft iron 효과 모두 보정.\n- **Partial**: 비행 준비 루틴, 페이로드 변경 후 등에 사용. Hard iron 효과(offset)만 보정.\n- **Large vehicle**: 기체가 너무 크거나 무거워 Complete 보정이 불가능할 때 사용.\n\n---\n\n## Complete 보정 절차 [5]\n\n1. QGroundControl을 시작하고 기체를 연결합니다.\n2. **\"Q\" icon > Vehicle Setup > Sensors** 를 선택합니다.\n3. **Compass** 버튼을 클릭합니다.\n4. **OK**를 클릭하여 보정을 시작합니다.\n5. 빨간색으로 표시된 자세로 기체를 위치시키고 정지 상태를 유지합니다.\n6. 안내에 따라 (이미지가 노란색으로 변하면) 지정된 축으로 기체를 회전시킵니다. 완료되면 이미지가 초록색으로 변합니다.\n7. 모든 자세에 대해 반복합니다.\n8. 모든 이미지가 초록색이 되면 보정 완료입니다.\n\n---\n\n## Partial \"Quick\" 보정 절차 [2]\n\n1. 기체를 앞에 들고 모든 축 방향으로 약 30도씩 2~3회 랜덤하게 회전시킵니다.\n2. 방위각 추정이 안정될 때까지 기다리고 컴퍼스 로즈가 올바른 방향을 가리키는지 확인합니다.\n\n> **참고**: 이 보정은 별도의 시작/종료가 없으며, 기체가 disarmed 상태일 때 자동으로 실행됩니다. 보정 결과는 arming/disarming 후에 저장됩니다. [2]\n\n---\n\n## 보정 확인 [3]\n\n보정 완료 후, 기체를 동서남북 방향으로 돌려보며 방위각 표시기와 지도의 화살표가 안정적으로 기체 방향과 일치하는지 확인하세",
+    "sources": [
+      {
+        "n": 6,
+        "title": "Compass Calibration",
+        "section": "Compass Calibration > Performing the Calibration > Preconditions",
+        "url": "https://docs.px4.io/v1.17/en/config/compass.html",
+        "distance": 0.427
+      }
+    ],
+    "refused": false,
+    "search_query": "compass calibration procedure",
+    "best_distance": 0.226
+  },
+  {
+    "question": "멀티콥터의 포지션 모드가 뭔가요?",
+    "latency_sec": 6.9,
+    "answer": "## 멀티콥터 Position Mode\n\nPosition mode는 멀티콥터를 위한 **가장 쉽고 안전한 수동 조종 모드**입니다. GPS 등 위치 추정이 필요합니다. [1][6]\n\n### 스틱 조작 방법\n\n- **Roll/Pitch 스틱**: 기체의 좌우/전후 방향 **가속도** 제어 (자동차 액셀 페달과 유사) [1][3]\n- **Throttle 스틱**: 상승/하강 속도 제어 [3]\n- **Yaw 스틱**: 수평면 기준 회전 각속도 제어 [3]\n\n### 핵심 특징\n\n- 스틱을 **중앙에 놓으면** 기체가 능동적으로 제동하고, 수평을 유지하며, **3D 공간의 현재 위치에 고정**됩니다 (바람 등 외력 보상 포함). [1][3]\n- 스틱을 최대로 밀면 `MPC_ACC_HOR_MAX`로 초기 가속 후 최종 속도 `MPC_VEL_MANUAL`에 도달합니다. [1]\n- **이륙**: 착지 상태에서 Throttle 스틱을 전체 범위의 **62.5% 이상** 올리면 이륙합니다. [3]\n- RC 데드존은 `MAN_DEADZONE` 파라미터로 설정됩니다. [3]\n\n### 다른 모드와의 차이점\n\nAltitude mode나 Stabilized mode와 달리, 스틱을 놓으면 바람 저항으로 서서히 멈추는 것이 아니라 **즉시 능동적으로 정지**합니다. [1]",
+    "sources": [
+      {
+        "n": 1,
+        "title": "Position Mode (Multicopter)",
+        "section": "Position Mode (Multicopter)",
+        "url": "https://docs.px4.io/v1.17/en/flight_modes_mc/position.html",
+        "distance": 0.189
+      },
+      {
+        "n": 6,
+        "title": "Flight Modes (Multicopter)",
+        "section": "Flight Modes (Multicopter) > Overview",
+        "url": "https://docs.px4.io/v1.17/en/flight_modes_mc/",
+        "distance": 0.349
+      }
+    ],
+    "refused": false,
+    "search_query": "Multicopter Position mode",
+    "best_distance": 0.189
+  },
+  {
+    "question": "배터리 페일세이프는 어떻게 설정하나요?",
+    "latency_sec": 5.1,
+    "answer": "# 배터리 페일세이프 설정 방법\n\n배터리 페일세이프는 배터리 잔량이 설정된 임계값 아래로 떨어질 때 트리거됩니다. [1]\n\n## 설정 방법\n\nQGroundControl의 Safety Setup 페이지에서 레벨과 페일세이프 동작을 모두 설정할 수 있습니다. [1][4]\n\n## 권장 설정 구성\n\n가장 일반적인 설정은 **Warn > Failsafe > Emergency** 순서로 구성하는 것입니다: [1]\n\n1. **Warn 레벨** → 경고(Warn) 동작 수행\n2. **Failsafe 레벨** → Return 모드 트리거\n3. **Emergency 레벨** → 즉시 Land 수행\n\n## 관련 파라미터\n\n| 설정 항목 | 파라미터 | 설명 |\n|---|---|---|\n| Failsafe Action | `COM_LOW_BAT_ACT` | Warn, Return, 또는 Land 동작 선택 |\n| Battery Warn Level | `BAT_LOW_THR` | 경고 트리거 배터리 잔량(%) |\n| Battery Failsafe Level | `BAT_CRIT_THR` | Return 동작 트리거 배터리 잔량(%) |\n| Battery Emergency Level | `BAT_EMERGEN_THR` | 즉시 Land 트리거 배터리 잔량(%) |\n\n[1]\n\n> ⚠️ 첫 번째 페일세이프 이벤트에 대한 동작만 지정할 수 있으며, 이후 페일세이프는 별도의 시스템 레벨 코드로 관리됩니다. [2]",
+    "sources": [
+      {
+        "n": 1,
+        "title": "Safety (Failsafe) Configuration",
+        "section": "Safety (Failsafe) Configuration > Battery Failsafes > Battery level failsafe",
+        "url": "https://docs.px4.io/v1.17/en/config/safety.html",
+        "distance": 0.336
+      },
+      {
+        "n": 2,
+        "title": "Basic Concepts",
+        "section": "Basic Concepts > Safety Settings (Failsafe)",
+        "url": "https://docs.px4.io/v1.17/en/getting_started/px4_basic_concepts.html",
+        "distance": 0.422
+      }
+    ],
+    "refused": false,
+    "search_query": "Battery failsafe configuration",
+    "best_distance": 0.336
+  },
+  {
+    "question": "QGroundControl로 PX4 펌웨어를 설치하는 방법을 알려 주세요.",
+    "latency_sec": 6.4,
+    "answer": "# QGroundControl로 PX4 펌웨어 설치 방법\n\n## 시작 전 주의사항\n\n- 차량의 모든 USB 연결을 **먼저 해제**해야 합니다 (직접 연결 및 telemetry radio 포함). [1]\n- 배터리로 차량에 전원을 공급하면 **안 됩니다**. [1]\n\n---\n\n## 설치 절차\n\n1. **QGroundControl**을 시작하고 차량을 연결합니다. [2]\n2. **\"Q\" 아이콘 > Vehicle Setup > Firmware** (사이드바)를 선택하여 *Firmware Setup*을 엽니다. [2]\n3. 비행 컨트롤러를 USB로 컴퓨터에 **직접** 연결합니다.\n   - USB 허브를 통하지 않고, 컴퓨터의 USB 포트에 직접 연결하세요. [2]\n4. **PX4 Pro Stable Release vX.x.x** 옵션을 선택하여 비행 컨트롤러에 맞는 최신 안정 버전을 설치합니다 (자동 감지됨). [2]\n5. **OK** 버튼을 클릭하여 업데이트를 시작합니다. [2]\n   - 펌웨어 다운로드, 기존 펌웨어 삭제 등 여러 단계가 진행되며, 각 단계는 화면에 출력되고 progress bar로 전체 진행 상황을 확인할 수 있습니다. [2]\n6. 펌웨어 로딩이 완료되면 장치/차량이 **재부팅**되고 재연결됩니다. [2]\n\n---\n\n## 설치 후\n\n펌웨어 설치 후에는 **vehicle airframe**, 센서, radio 등을 설정해야 합니다. [2]\n\n> **TIP:** 설치 중 콘솔에서 FMUv2 target이 설치되는 경우, 최신 보드라면 비행 컨트롤러의 전체 메모리에 접근하기 위해 bootloader 업데이트가 필요할 수 있습니다. [2]",
+    "sources": [
+      {
+        "n": 1,
+        "title": "Loading Firmware",
+        "section": "Loading Firmware",
+        "url": "https://docs.px4.io/v1.17/en/config/firmware.html",
+        "distance": 0.207
+      }
+    ],
+    "refused": false,
+    "search_query": "PX4 firmware installation using QGroundControl",
+    "best_distance": 0.207
+  },
+  {
+    "question": "VTOL 전환(transition)은 어떻게 동작하나요?",
+    "latency_sec": 8.7,
+    "answer": "# VTOL 전환(Transition) 동작 방식\n\n## 전환의 세 가지 상태\nVTOL은 멀티로터, 고정익, **전환(transition)** 이라는 세 가지 상태를 가집니다. 각각의 상태에 대해 튜닝이 필요합니다. [2]\n\n---\n\n## 멀티로터 → 고정익 (Front-transition)\n\n1. 지상 최소 **20미터 이상** 고도를 확보하고, 가능하면 **바람을 향해** 전환을 시작합니다. [3]\n2. 안정적인 호버링 상태에서 전환을 시작합니다. [3]\n3. **VT_F_TRANS_THR** (전환 스로틀)이 전환 속도에 도달할 만큼 충분히 높게 설정되어야 합니다. [2]\n4. **VT_PSHER_SLEW** (슬루 레이트)에 따라 스로틀이 목표값까지 점진적으로 증가합니다 (기본값 0.33 = 3초에 100% 도달). [2]\n5. **VT_ARSP_BLEND** 설정에 따라 전환 속도에 가까워지면 멀티로터 제어가 줄고 고정익 제어가 증가합니다. [2]\n6. **VT_ARSP_TRANS** (전환 대기속도)에 도달하면 전환이 완료됩니다. [2]\n7. 전환 후 **고도 손실**이 발생할 수 있으므로 즉시 스로틀을 올릴 준비를 합니다. [3]\n8. 50~100미터 내에 전환이 완료되지 않으면 전환을 중단하고 착륙합니다. [3]\n\n---\n\n## 고정익 → 멀티로터 (Back-transition)\n\n1. 직선 수평 접근으로 속도를 줄인 후 전환 스위치를 작동합니다. [3]\n2. 컨트롤러는 **VT_B_DEC_MSS** (예상 감속도)보다 감속이 부족하면 기체를 **피치 업**하여 제동을 보조합니다. [4]\n3. **VT_B_DEC_I** (I 게인)를 높이면 더 공격적인 피치 업으로 감속합니다. [4]\n4. 수평 속도가 **MPC_XY_CRUISE**에 도달하거나 **VT_B_TRANS_DUR** 시간이 경과하면 (둘 중 먼저 발생하는 것 기준) 전환이 완료됩니다. [4]\n\n---\n\n## 주의사항\n- 전환 중 문제가 발생하면 멀티로터 모드로 복귀하므로, **멀티로터 튜닝이 잘 되어 있어야** 합니다. [3]",
+    "sources": [
+      {
+        "n": 2,
+        "title": "Generic Standard VTOL (QuadPlane) Configuration & Tuning",
+        "section": "Generic Standard VTOL (QuadPlane) Configuration & Tuning > Firmware & Basic Settings > Transition Tuning",
+        "url": "https://docs.px4.io/v1.17/en/config_vtol/vtol_quad_configuration.html",
+        "distance": 0.412
+      },
+      {
+        "n": 4,
+        "title": "VTOL Back-transition Tuning",
+        "section": "VTOL Back-transition Tuning",
+        "url": "https://docs.px4.io/v1.17/en/config_vtol/vtol_back_transition_tuning.html",
+        "distance": 0.443
+      }
+    ],
+    "refused": false,
+    "search_query": "VTOL transition mechanism how it works",
+    "best_distance": 0.393
+  },
+  {
+    "question": "PX4 v1.17에서 새로 추가된 기능은 뭐가 있나요?",
+    "latency_sec": 1.8,
+    "answer": "죄송합니다. PX4 문서에서 이 질문에 대한 근거를 찾지 못했습니다.",
+    "sources": [],
+    "refused": true,
+    "search_query": "PX4 v1.17 new features release notes",
+    "best_distance": 0.254
+  },
+  {
+    "question": "MPC_XY_VEL_MAX 파라미터의 기본값이 뭔가요?",
+    "latency_sec": 2.5,
+    "answer": "죄송합니다. PX4 문서에서 이 질문에 대한 근거를 찾지 못했습니다.",
+    "sources": [],
+    "refused": true,
+    "search_query": "MPC_XY_VEL_MAX default value",
+    "best_distance": 0.465
+  },
+  {
+    "question": "오늘 서울 날씨 알려 주세요.",
+    "latency_sec": 1.1,
+    "answer": "죄송합니다. PX4 문서에서 이 질문에 대한 근거를 찾지 못했습니다.",
+    "sources": [],
+    "refused": true,
+    "search_query": "Seoul weather today",
+    "best_distance": 0.866
+  },
+  {
+    "question": "김치찌개 맛있게 끓이는 법 알려 주세요.",
+    "latency_sec": 1.2,
+    "answer": "죄송합니다. PX4 문서에서 이 질문에 대한 근거를 찾지 못했습니다.",
+    "sources": [],
+    "refused": true,
+    "search_query": "kimchi jjigae recipe",
+    "best_distance": 0.877
+  }
+]
